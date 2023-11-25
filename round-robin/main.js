@@ -12,20 +12,20 @@ window.show = function () {
     );
 
   for (let quantum = 1; quantum <= 5; quantum++) {
-    const quantumContainer = document.createElement("div");
-    quantumContainer.className = "quantum-container";
-    chartContainer.appendChild(quantumContainer);
-
     const innerDiv = document.createElement("div");
-    quantumContainer.appendChild(innerDiv);
-
+    const canvas = document.createElement("canvas");
     const quantumTitle = document.createElement("h1");
-    quantumTitle.innerText = `Quantum ${quantum}`;
-    innerDiv.appendChild(quantumTitle);
-
+    const quantumContainer = document.createElement("div");
     const processCodeContainer = document.createElement("pre");
+    
+    quantumTitle.innerText = `Quantum ${quantum}`;
     processCodeContainer.className = "process-code";
+    quantumContainer.className = "quantum-container";
+
+    innerDiv.appendChild(quantumTitle);
+    quantumContainer.appendChild(innerDiv);
     innerDiv.appendChild(processCodeContainer);
+    chartContainer.appendChild(quantumContainer);
 
     const processCode = processos
       .map(
@@ -37,7 +37,6 @@ window.show = function () {
 
     const valores = roundRobin(processos, quantum);
 
-    const canvas = document.createElement("canvas");
     canvas.className = "chart";
     canvas.width = 500;
     canvas.height = 150;
@@ -52,7 +51,7 @@ window.show = function () {
           "Tempo de execução (s)",
           "Tempo médio de espera (s)",
           "Tempo médio de retorno (s)",
-          "Vazão",
+          "Vazão processos/s",
         ],
         datasets: [
           {
