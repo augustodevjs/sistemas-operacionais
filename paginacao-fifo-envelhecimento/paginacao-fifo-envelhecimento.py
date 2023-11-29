@@ -21,6 +21,7 @@ def fifo(page_references, num_frames):
 
     return page_faults
 
+
 def aging(page_references, num_frames, aging_bits):
     # Implementação do algoritmo de envelhecimento
     frames = {}         # Dicionário para armazenar páginas e seus bits de envelhecimento
@@ -72,13 +73,13 @@ def main():
         aging_page_faults.append(aging_faults)
 
         # Imprime os resultados na console
-        print(f"Num. Molduras: {num_frames} | Faltas de Pagina (FIFO): {fifo_faults} | Faltas de Pagina (Aging): {aging_faults}")
+        print(f"Num. Molduras: {num_frames} | Faltas de Página (FIFO): {fifo_faults} | Faltas de Página (Aging): {aging_faults}")
 
     # Plota os resultados em um gráfico
     plt.plot(num_frames_range, fifo_page_faults, label='FIFO')
     plt.plot(num_frames_range, aging_page_faults, label='Aging')
-    plt.xlabel('Numero de Molduras de Pagina')
-    plt.ylabel('Faltas de Pagina por 1000 Referências')
+    plt.xlabel('Número de Molduras de Página')
+    plt.ylabel('Faltas de Página por 1000 Referências')
     plt.legend()
     plt.show()
 
