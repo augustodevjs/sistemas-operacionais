@@ -12,16 +12,24 @@ def fifo(page_references, num_frames):
     Retorna:
     - Número total de faltas de página.
     """
+
+    """ 
+    Inicializa uma lista vazia chamada frames para representar as molduras de página e uma variável page_faults para contar as faltas de página.
+    """
     frames = []
     page_faults = 0
 
     for page in page_references:
+        # Se a página não estiver presente nas molduras (frames), ocorre uma falta de página:
         if page not in frames:
+            # Se o número de molduras ainda não atingiu o máximo (len(frames) < num_frames), a página é simplesmente adicionada às molduras.
             if len(frames) < num_frames:
                 frames.append(page)
-            else:
+            # Caso contrário, a página mais antiga é removida, e a nova página é adicionada ao final da lista.
+            else:   
                 frames.pop(0)
                 frames.append(page)
+            #Incrementa o contador de faltas de página.
             page_faults += 1
 
     return page_faults
