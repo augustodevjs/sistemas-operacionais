@@ -70,18 +70,16 @@ def simulate_page_replacement_algorithm(algorithm, page_references, num_frames, 
     """
     Simula a execução de um algoritmo de substituição de página.
 
-    Parâmetros:
-    - algorithm: Função representando o algoritmo.
-    - page_references: Lista de referências de página.
-    - num_frames: Número máximo de molduras de página.
-    - *args: Argumentos adicionais para a função do algoritmo.
-
-    Retorna:
-    - Lista de números de molduras e total de faltas de página para cada configuração de molduras.
-    """
-    frames = []  # Adicionado para redefinir os frames para cada simulação
+    frames = []  
     page_faults = 0
     page_faults_per_num_frames = []
+
+    for num_frames in range(1, num_frames + 1):
+        page_faults = algorithm(page_references, num_frames, *args)
+        page_faults_per_num_frames.append(page_faults)
+        print(f"Num. Molduras: {num_frames} | Faltas de Página ({algorithm.__name__}): {page_faults}")
+
+    return page_faults_per_num_frames
 
     for num_frames in range(1, num_frames + 1):
         page_faults = algorithm(page_references, num_frames, *args)
